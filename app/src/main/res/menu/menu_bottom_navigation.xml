@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_home_page"
+        android:icon="@drawable/home_page"
+        android:title="@string/home_page" />
+    <item
+        android:id="@+id/item_my_delivery"
+        android:icon="@drawable/send"
+        android:title="@string/send" />
+    <item
+        android:id="@+id/item_service_point"
+        android:icon="@drawable/service_point"
+        android:title="@string/service_point" />
+    <item
+        android:id="@+id/item_my"
+        android:icon="@drawable/my"
+        android:title="@string/my" />
+</menu>

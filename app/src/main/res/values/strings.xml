@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IBox</string>
+    <string name="home_page">首页</string>
+    <string name="my_delivery">我的快递</string>
+    <string name="service_point">服务点</string>
+    <string name="my">我的</string>
+    <string name="send">寄件</string>
+</resources>
