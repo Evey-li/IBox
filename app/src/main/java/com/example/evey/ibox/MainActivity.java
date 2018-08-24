@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements
                 return true;
             }
         });
-
     }
 
     public void clickMenu(@IdRes int itemId,int index){

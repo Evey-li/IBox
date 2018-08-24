@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,8 +42,13 @@ public class DeliveryFragment extends Fragment {
     LinearLayout service_point;
     @BindView(R.id.item_type)
     LinearLayout item_type;
+    @BindView(R.id.delivery_weight)
+    LinearLayout delivery_weight;
     @BindView(R.id.send_type)
     LinearLayout send_type;
+    @BindView(R.id.payment)
+    LinearLayout payment;
+
     @BindView(R.id.receive_address_detail)
     TextView receive_addr_detail;
     @BindView(R.id.receiver)
@@ -59,9 +65,15 @@ public class DeliveryFragment extends Fragment {
     TextView sendTypeDetail;
     @BindView(R.id.item_detail)
     TextView itemDetail;
+    @BindView(R.id.weight)
+    TextView weight;
 
     private Button sendDeliverySelf;
     private Button courierTakeDelivery;
+    private Button senderPay;
+    private Button receiverPay;
+    private Button confirmWeight;
+    private EditText weightDialog;
 
 
     @Nullable
@@ -167,6 +179,35 @@ public class DeliveryFragment extends Fragment {
             }
         });
 
+        //寄件重量填写
+        delivery_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+                View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_dialog_weight, null);
+
+                dialog.setContentView(dialogView);
+                dialog.show();
+
+                dialogView.findViewById(R.id.close_weight_dialog).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                confirmWeight = (Button)dialogView.findViewById(R.id.confirm_weight);
+                weightDialog = (EditText) dialogView.findViewById(R.id.weight_dialog);
+                confirmWeight.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        weight.setText(weightDialog.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+        });
+
         //寄件方式选择
         send_type.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,6 +239,42 @@ public class DeliveryFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         sendTypeDetail.setText(courierTakeDelivery.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        //付款方式选择
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+                View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_dialog_payment, null);
+
+                dialog.setContentView(dialogView);
+                dialog.show();
+
+                dialogView.findViewById(R.id.close_payment_dialog).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                //选择寄件人付款
+                senderPay = (Button)dialogView.findViewById(R.id.sender_pay);
+                senderPay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        paymentDetail.setText(senderPay.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+                //选择收件人付款
+                receiverPay = dialogView.findViewById(R.id.receiver_pay);
+                receiverPay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        paymentDetail.setText(receiverPay.getText().toString());
                         dialog.dismiss();
                     }
                 });
